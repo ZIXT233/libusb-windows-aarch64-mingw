@@ -116,14 +116,15 @@ case $host in
 	AC_MSG_RESULT([Windows (using Cygwin)])
 	backend=windows
 	platform=windows
-	EXTRA_CFLAGS="-mwin32"
+	#EXTRA_CFLAGS="-mwin32"
 	;;
 *-mingw* | *msys*)
 	AC_MSG_RESULT([Windows])
 	backend=windows
 	platform=windows
 	test "x$enable_shared" = xyes && create_import_lib=yes
-	EXTRA_CFLAGS="-mwin32 -fno-omit-frame-pointer"
+	#EXTRA_CFLAGS="-mwin32 -fno-omit-frame-pointer"
+	EXTRA_CFLAGS="-fno-omit-frame-pointer"
 	EXTRA_LDFLAGS="-static-libgcc"
 	;;
 *)
@@ -201,7 +202,8 @@ sunos)
 windows)
 	AC_CHECK_TYPES([struct timespec], [], [], [[#include <time.h>]])
 	AC_DEFINE([_WIN32_WINNT], [_WIN32_WINNT_VISTA], [Define to the oldest supported Windows version.])
-	LT_LDFLAGS="${LT_LDFLAGS} -avoid-version -Wl,--add-stdcall-alias"
+	#LT_LDFLAGS="${LT_LDFLAGS} -avoid-version -Wl,--add-stdcall-alias"
+	LT_LDFLAGS="${LT_LDFLAGS} -avoid-version"
 	;;
 *)
 	dnl no special handling required
